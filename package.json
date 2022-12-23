@@ -2,7 +2,7 @@
   "name": "pizza-time",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Tran Huu Toan",
+  "author": "Group3-SPM",
   "scripts": {
     "dev": "nodemon server",
     "start": "node server",

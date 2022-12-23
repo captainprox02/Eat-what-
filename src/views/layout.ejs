@@ -19,7 +19,7 @@
   <nav class="sticky top-0 z-20">
     <div class="mx-auto flex items-center justify-between py-4 container pl-3 md:pl-0">
       <a class="hidden md:contents" href="/">
-        <img src="/img/logo.png" alt="logo" /></a>
+        <img src="/img/logo.png" alt="logo" class="logo" /></a>
       <div>
         <ul class="flex items-center">
           <% if(user) { %>
@@ -34,12 +34,21 @@
               <li class="ml-6">
 
                 <% if(user) {%>
-                  <% if(user.email==="admin@admin.com" ) {%>
+                  <% if(user.role==="admin" ) {%>
                     <a href="/admin/orders">Orders</a>
                     <%} else {%>
                       <a href="/customer/orders">Orders</a>
                       <% } %>
                         <% } %>
+
+              </li class="ml-6">
+              <li class="ml-6">
+
+                <% if(user) {%>
+                  <% if(user.role==="admin" ) {%>
+                    <a href="/admin/create-food">Create Food</a>
+                    <%}%>
+                      <% } %>
 
               </li class="ml-6">
               <% if(user) { %>
@@ -69,7 +78,7 @@
 
   <%- body %>
     <footer class="text-center py-10 text-lg">
-      Copyright © 2021 Tran Huu Toan
+      Copyright © 2022 Group3-SPM
       <img class="inline-block ml-1"
         src="https://hitwebcounter.com/counter/counter.php?page=7850956&style=0006&nbdigits=5&type=page&initCount=0"
         border="0" /></a>
