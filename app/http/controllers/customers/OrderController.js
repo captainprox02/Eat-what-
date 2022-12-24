@@ -39,10 +39,19 @@ class OrderController {
       });
   }
 
-  cancel(req, res) {
-    Order.deleteOne({ _id: req.body.orderId }, (err, data) => {
-      return res.redirect("/customer/orders");
-    });
+  async cancel(req, res) {
+    const order = await Order.findById(req.params.id);
+      order.updateOne({
+        status: "cancelled",
+      })
+      .then((result) => {
+        return res.redirect("/customer/orders");
+      })
+      .catch((err) => {
+        req.flash("err", "Something went wrong");
+        return res.redirect("/customer/orders");
+      }
+    );
   }
 
   async status(req, res) {

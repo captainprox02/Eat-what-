@@ -6,6 +6,8 @@ import { updateStatus } from "./update-status";
 import { initStripe } from "./stripe";
 
 let addToCart = document.querySelectorAll(".add-to-cart");
+let editFood = document.querySelectorAll(".edit");
+let deleteFood = document.querySelectorAll(".delete");
 let cartCouter = document.querySelector("#cartCouter");
 let deleteCartButton = document.querySelectorAll("#deleteCartButton");
 

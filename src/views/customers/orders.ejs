@@ -15,6 +15,12 @@
         </p>
       </div>
       <% } %>
+
+      <% if(messages.error) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= messages.error %>
+        </div>
+      <% } %>
         <table class="w-full table-auto bg-white">
           <thead>
             <tr>
@@ -22,6 +28,8 @@
               <th class="px-4 py-2 text-left">Phone</th>
               <th class="px-4 py-2 text-left">Address</th>
               <th class="px-4 py-2 text-left">Time</th>
+              <th class="px-4 py-2 text-left">Status</th>
+              <th class="px-4 py-2 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -40,14 +48,30 @@
                     <%= order.address %>
                   </td>
                   <td class="border px-4 py-2 flex justify-between">
-                    <span class="my-auto">
-
                       <%= moment(order.createdAt).tz("Asia/Ho_Chi_Minh").format("LLL") %>
-                    </span>
-                    <form class="px-6 md:px-0" action=" /customer/cancel-order" method="POST">
+                  </td>
+                  <td class="border px-4 py-2">
+                      <% if(order.status === 'order_placed') { %>
+                        <span class="text-yellow-500">Order placed</span>
+                      <% } else if(order.status === 'prepared')  { %>
+                        <span class="text-green-500">Prepared</span>
+                      <% } else if(order.status === 'completed') { %>
+                        <span class="text-green-500">Completed</span>
+                      <% } else if(order.status === 'confirmed') { %>
+                        <span class="text-green-500">Confirmed</span>
+                      <% } else if(order.status === 'delivered') { %>
+                        <span class="text-green-500">Delivered</span>
+                      <% } else if(order.status === 'cancelled') { %>
+                        <span class="text-red-500">Cancelled</span>
+                      <% } %>
+                  </td>
+                  <td class="border px-4 py-2">
+                    <% if(order.status === 'order_placed' || order.status === 'prepared') { %>
+                    <form class="px-6 md:px-0" action=" /customer/cancel-order/<%= order._id %>" method="POST">
                       <button value="<%= order._id %>" name="orderId"
                         class="btn-primary ml-4 md:px-2 py-2 rounded text-white">Cancel</button>
                     </form>
+                    <% } %>
                   </td>
                 </tr>
                 <% }) %>

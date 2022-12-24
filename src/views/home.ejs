@@ -25,7 +25,7 @@
           <a class="font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-yellow-600 cursor-pointer text-sm pb-4"
             onclick="changeAtiveTab(event,'tab-pizza')">
             <i class="fas fa-pizza-slice mr-2 text-3xl"></i>
-            Pizzas
+            Foods
           </a>
         </li>
         <li class="-mb-px mr-2 last:mr-0 text-center">
@@ -34,6 +34,13 @@
             <i class="fas fa-coffee mr-2 text-3xl"></i>
 
             Drinks
+          </a>
+        </li>
+        <li class="-mb-px mr-2 last:mr-0 text-center">
+          <a class="font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal bg-white cursor-pointer text-sm pb-4"
+            onclick="changeAtiveTab(event,'tab-fast-food')">
+            <i class="fas fa-hamburger mr-2 text-3xl"></i>
+            Fast Food
           </a>
         </li>
       </ul>
@@ -47,25 +54,41 @@
                 <% pizzas.forEach((pizza)=> { %>
                   <% if(true) { %>
                     <div class="w-66">
-                      <img class="mb-4" src="<%= pizza.image %>" alt="">
-                      <div class="text-center">
-                        <h2 class="mb-4 text-lg">
-                          <%= pizza.name %>
-                        </h2>
-                        <span class="size py-1 px-4 uppercase text-xs rounded-full">
-                          <%= pizza.size %>
-                        </span>
-                        <div class="flex items-center justify-around mt-6">
-                          <span class="font-bold text-lg">
-                            <%= pizza.price %> $
+                      <a href="/food/<%= pizza._id %>">
+
+                        <img class="mb-4 rounded-md" src="<%= pizza.image %>" alt="">
+                        <div class="text-center">
+                          <h2 class="mb-4 text-lg">
+                            <%= pizza.name %>
+                          </h2>
+                          <span class="size py-1 px-4 uppercase text-xs rounded-full">
+                            <%= pizza.size %>
                           </span>
-                          <button data-pizza="<%= JSON.stringify(pizza) %>"
-                            class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
-                            <span>+</span>
-                            <span class="ml-4">Add</span>
-                          </button>
+                          <div class="flex items-center justify-around mt-6">
+                            <span class="font-bold text-lg">
+                              <%= pizza.price %> $
+                            </span>
+                            <% if(user.role=="admin" ){ %>
+                              <a href="/admin/food/<%= pizza._id %>/edit"
+                                class="edit py-1 px-2 rounded-full flex items-center font-bold">
+                                <span class="ml-2">Edit</span>
+                              </a>
+
+                              <form action="/admin/food/<%= pizza._id %>/delete" method="POST">
+                                <button type="submit" class="delete py-1 px-2 rounded-full flex items-center font-bold">
+                                  <span class="ml-2">Delete</span>
+                                </button>
+                              </form>
+                              <% }else{ %>
+                                <button data-pizza="<%= JSON.stringify(pizza) %>"
+                                  class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                                  <span>+</span>
+                                  <span class="ml-4">Add</span>
+                                </button>
+                                <% } %>
+                          </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
                     <% } %>
                       <% }) %>
@@ -105,11 +128,42 @@
               </div>
               <!-- End drinks  -->
             </div>
+            <div class="block" id="tab-pizza">
+              <!-- Pizza -->
+              <div
+                class="grid gap-x-2 gap-y-16 md:gap-x-4 lg:gap-x-40 gap-y-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <% pizzas.forEach((pizza)=> { %>
+                  <% if(pizza.name.includes("Fast Food") ) { %>
+                    <div class="w-66">
+                      <img class="mb-4 rounded-md" src="<%= pizza.image %>" alt="">
+                      <div class="text-center">
+                        <h2 class="mb-4 text-lg">
+                          <%= pizza.name %>
+                        </h2>
+                        <span class="size py-1 px-4 uppercase text-xs rounded-full">
+                          <%= pizza.size %>
+                        </span>
+                        <div class="flex items-center justify-around mt-6">
+                          <span class="font-bold text-lg">
+                            <%= pizza.price %> $
+                          </span>
+
+                          <button data-pizza="<%= JSON.stringify(pizza) %>"
+                            class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                            <span>+</span>
+                            <span class="ml-4">Add</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+                      <% }) %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 <script type="text/javascript">
   function changeAtiveTab(event, tabID) {

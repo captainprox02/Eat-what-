@@ -404,6 +404,36 @@ section.hero img {
   outline: none;
 }
 
+.edit {
+  border: 2px solid #fe5f1e;
+  color: #fe5f1e;
+  transition: all 0.05s ease-in-out;
+}
+.edit:hover {
+  background: #fe5f1e;
+  border-color: #fff;
+  color: #fff;
+}
+.edit:focus {
+  outline: none;
+}
+
+.delete{
+  border: 2px solid #fe5f1e;
+  color: #fe5f1e;
+  transition: all 0.05s ease-in-out;
+}
+
+.delete:hover {
+  background: #fe5f1e;
+  border-color: #fff;
+  color: #fff;
+}
+
+.delete:focus {
+  outline: none;
+}
+
 section .cart {
   background: #f8f8f8;
 }
@@ -434,12 +464,11 @@ section input::-webkit-inner-spin-button {
 
 section.menu img {
   transition: transform 0.2s;
-  z-index: -1;
 }
 
 section.menu img:hover {
   transform: scale(1.1);
-  z-index: -1;
+  z-index: 1;
 }
 
 section.status {
@@ -538,7 +567,6 @@ section.status {
     font-size: 34px;
   }
 }
-
 
 .logo{
   height: 50px;

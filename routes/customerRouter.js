@@ -6,6 +6,6 @@ const auth = require("../app/http/middleware/auth");
 router.get("/orders", auth, orderController.index);
 router.post("/orders", auth, orderController.store);
 router.get("/orders/:id", auth, orderController.status);
-router.post("/cancel-order", auth, orderController.cancel);
+router.post("/cancel-order/:id", auth, orderController.cancel);
 
 module.exports = router;

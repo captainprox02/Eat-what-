@@ -3,7 +3,11 @@ const Menu = require("../../models/menu");
 class homeController {
   async index(req, res) {
     const pizzas = await Menu.find();
-    return res.render("home", { pizzas: pizzas });
+    if(req.user){
+      return res.render("home", { pizzas: pizzas, user: req.user });
+    }else{
+      return res.render("home", { pizzas: pizzas });
+    }
   }
 }
 
