@@ -1,4 +1,4 @@
-# Pizza Time
+# EatWhat ? 
 
 Realtime pizza order tracker app using Node - Express - Mongo - Socket.io
 
